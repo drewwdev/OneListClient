@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ConsoleTables;
 
 namespace OneListClient
 {
@@ -16,6 +17,14 @@ namespace OneListClient
 
             var items = await JsonSerializer.DeserializeAsync<List<Item>>(responseBodyAsAStream);
 
+            var table = new ConsoleTable("Text");
+
+            foreach (var item in items)
+            {
+                table.AddRow(item.Text);
+            }
+
+            table.Write();
         }
     }
 }
